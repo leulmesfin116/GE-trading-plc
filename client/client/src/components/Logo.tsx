@@ -26,16 +26,26 @@ export const Logo: React.FC<LogoProps> = ({
       <div className="logo-text-group">
         <span
           className="logo-company-name"
-          style={{ color: darkMode ? '#ffffff' : '#111827' }}
+          style={{
+            color: darkMode ? '#ffffff' : '#111827',
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 700,
+            letterSpacing: '0.02em',
+          }}
         >
-          GE Trading<span className="plc-tag">PLC</span>
+          GE TRADING<span className="plc-tag" style={{ color: '#ff6b00', marginLeft: '4px' }}>PLC</span>
         </span>
         {showSubtitle && (
           <span
             className="logo-tagline"
-            style={{ color: darkMode ? '#94a3b8' : '#64748b' }}
+            style={{
+              color: darkMode ? '#94a3b8' : '#78716c',
+              fontSize: '0.68rem',
+              letterSpacing: '0.14em',
+              fontWeight: 600,
+            }}
           >
-            Import & Export Solutions
+            FURNITURE & LIVING
           </span>
         )}
       </div>

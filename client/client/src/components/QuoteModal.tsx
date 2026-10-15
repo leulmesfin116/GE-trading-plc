@@ -92,15 +92,15 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
           <div>
             <div style={{ marginBottom: '20px' }}>
               <span className="badge badge-orange" style={{ marginBottom: '8px' }}>
-                Trade Inquiry Desk
+                Custom Furniture Commission
               </span>
               <h3 style={{ fontSize: '1.5rem', marginTop: '6px' }}>
-                {product ? `Request Quote: ${product.name}` : 'Request a Trade Quotation'}
+                {product ? `Inquire: ${product.name}` : 'Request a Custom Furniture Piece'}
               </h3>
               <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
                 {product
-                  ? `Category: ${product.category} | MOQ: ${product.moq}`
-                  : 'Specify your commodity, volume, and destination requirements for instant quotation.'}
+                  ? `Category: ${product.category} | Material: ${product.material} | Price: ${product.price}`
+                  : 'Specify your timber, dimensions, and custom furniture requirements.'}
               </p>
             </div>
 
@@ -112,18 +112,17 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     type="text"
                     required
                     className="form-control"
-                    placeholder="e.g. John Doe"
+                    placeholder="e.g. Elena Rostova"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
-                  <label>Company / Enterprise *</label>
+                  <label>Company / Project Name</label>
                   <input
                     type="text"
-                    required
                     className="form-control"
-                    placeholder="e.g. Atlas Commodities Ltd"
+                    placeholder="e.g. Studio Living / Private Residence"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   />
@@ -132,12 +131,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                 <div className="form-group">
-                  <label>Business Email *</label>
+                  <label>Email Address *</label>
                   <input
                     type="email"
                     required
                     className="form-control"
-                    placeholder="john@atlas.com"
+                    placeholder="elena@studio.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
@@ -157,22 +156,22 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                 <div className="form-group">
-                  <label>Estimated Quantity *</label>
+                  <label>Desired Quantity *</label>
                   <input
                     type="text"
                     required
                     className="form-control"
-                    placeholder={product ? `Min: ${product.moq}` : 'e.g. 50 Metric Tons'}
+                    placeholder={product ? `e.g. 1 Unit (${product.name})` : 'e.g. 1 Bed, 4 Chairs'}
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
-                  <label>Destination Port / City</label>
+                  <label>Delivery City / Country</label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Djibouti / Mombasa / Dubai"
+                    placeholder="e.g. Addis Ababa / Dubai / London"
                     value={formData.destinationPort}
                     onChange={(e) => setFormData({ ...formData, destinationPort: e.target.value })}
                   />

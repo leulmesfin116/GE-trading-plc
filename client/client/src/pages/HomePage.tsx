@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS_DATA, type Product } from '../data/products';
 
@@ -7,279 +7,214 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
-  const featuredProducts = PRODUCTS_DATA.filter((p) => p.featured);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      title: 'The Art of Modern\nInterior Living',
+      image: '/images/hero.jpg',
+      subtitle: 'Masterfully crafted beds, tables, and chairs engineered for timeless tranquility.',
+    },
+    {
+      title: 'Pure Form &\nArtisanal Woodwork',
+      image: '/images/bed.jpg',
+      subtitle: 'Natural European oak and architectural joinery for contemporary sanctuaries.',
+    },
+  ];
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const bestsellers = PRODUCTS_DATA.filter((p) => p.bestseller).slice(0, 4);
 
   return (
     <div>
-      {/* ================= HERO SECTION ================= */}
-      <section className="hero">
-        <div className="container">
-          <div className="hero-grid">
-            <div className="hero-content">
-              <span className="badge badge-orange" style={{ marginBottom: '14px' }}>
-                ⭐ Premier Import & Export Trading Partner
-              </span>
-              <h1>
-                Powering Global Trade with <span className="hero-highlight">GE Trading PLC</span>
-              </h1>
-              <p className="hero-subtitle">
-                We deliver world-class agricultural commodities, industrial machinery, and construction materials with uncompromised quality, verified origins, and streamlined international logistics.
-              </p>
+      {/* ================= HERO SECTION (MATCHING SCREENSHOT) ================= */}
+      <section
+        className="hero-editorial"
+        style={{
+          backgroundImage: `url(${heroSlides[activeSlide].image})`,
+          transition: 'background-image 0.6s ease-in-out',
+        }}
+      >
+        <div className="hero-editorial-content">
+          <h1 className="hero-title-editorial">
+            The Art of Modern<br />Interior Living
+          </h1>
+        </div>
 
-              <div className="hero-actions">
-                <Link to="/products" className="btn btn-primary btn-lg">
-                  Explore Products & Commodities →
-                </Link>
-                <button
-                  className="btn btn-outline btn-lg"
-                  onClick={() => onOpenQuoteModal()}
-                >
-                  Request a Trade Quote
-                </button>
-              </div>
+        {/* Carousel Arrows (< and >) */}
+        <div className="hero-carousel-nav">
+          <button className="hero-nav-arrow" onClick={prevSlide} aria-label="Previous Slide">
+            ‹
+          </button>
+          <button className="hero-nav-arrow" onClick={nextSlide} aria-label="Next Slide">
+            ›
+          </button>
+        </div>
+      </section>
 
-              {/* Stats Banner */}
-              <div className="hero-stats-banner">
-                <div className="stat-item">
-                  <div className="stat-num">15<span>+</span></div>
-                  <div className="stat-label">Years of Trading Trust</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-num">30<span>+</span></div>
-                  <div className="stat-label">Destination Markets</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-num">100<span>k+</span></div>
-                  <div className="stat-label">Tons Shipped</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-num">99.8<span>%</span></div>
-                  <div className="stat-label">Fulfillment Accuracy</div>
-                </div>
-              </div>
-            </div>
+      {/* ================= BENEFIT STRIP (MATCHING SCREENSHOT) ================= */}
+      <section className="benefits-strip">
+        <div className="benefits-grid">
+          <div className="benefit-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <span className="benefit-text">Free Shipping Over $50</span>
+          </div>
 
-            {/* Visual Card / Graphic Showcase */}
-            <div className="hero-visual">
-              <div className="hero-visual-card">
-                <div className="hero-card-header">
-                  <div>
-                    <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#ff6b00', fontWeight: '700' }}>
-                      Certified Enterprise
-                    </div>
-                    <div className="hero-card-title">GE Trading PLC Operations</div>
-                  </div>
-                  <span className="badge badge-success">● Active Shipments</span>
-                </div>
+          <div className="benefit-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            <span className="benefit-text">Quality Assurance</span>
+          </div>
 
-                <div className="hero-feature-list">
-                  <div className="hero-feature-item">
-                    <div className="feature-icon-box">☕</div>
-                    <div>
-                      <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>Specialty Agricultural Exports</div>
-                      <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Specialty Coffee, Sesame Seeds, Pulses & Spices</div>
-                    </div>
-                  </div>
+          <div className="benefit-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <polyline points="21 8 21 21 3 21 3 8"></polyline>
+              <rect x="1" y="3" width="22" height="5"></rect>
+              <line x1="10" y1="12" x2="14" y2="12"></line>
+            </svg>
+            <span className="benefit-text">Return within 14 days</span>
+          </div>
 
-                  <div className="hero-feature-item">
-                    <div className="feature-icon-box" style={{ background: '#111827', border: '1px solid #ff6b00' }}>🏗️</div>
-                    <div>
-                      <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>Construction & Industrial Sourcing</div>
-                      <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>High-grade Rebars, Cement, Heavy Machinery</div>
-                    </div>
-                  </div>
-
-                  <div className="hero-feature-item">
-                    <div className="feature-icon-box">🚢</div>
-                    <div>
-                      <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>Seamless End-to-End Logistics</div>
-                      <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Port clearance, multimodal freight, and custom storage</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>Standard Incoterms: CIF, FOB, CFR</span>
-                  <Link to="/about" style={{ fontSize: '0.85rem', color: '#ff6b00', fontWeight: '700' }}>
-                    Learn More →
-                  </Link>
-                </div>
-              </div>
-            </div>
+          <div className="benefit-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span className="benefit-text">Support 24/7</span>
           </div>
         </div>
       </section>
 
-      {/* ================= CORE TRADING SECTORS ================= */}
-      <section className="section section-alt">
-        <div className="container">
-          <div className="section-header">
-            <span className="badge badge-orange">Diverse Capabilities</span>
-            <h2>Our Core Trading Sectors</h2>
-            <p>
-              GE Trading PLC operates across strategic sectors essential for modern industry, national infrastructure, and commercial markets.
+      {/* ================= CATEGORY CARDS (BEDS, TABLES, CHAIRS, LIVING) ================= */}
+      <section className="category-row-section">
+        <div className="category-cards-grid">
+          {/* Category 1: Beds */}
+          <Link to="/products?category=Beds" className="cat-card">
+            <img src="/images/bed.jpg" alt="Modern Minimalist Beds" />
+            <div className="cat-card-overlay">
+              <div className="cat-card-title">Beds</div>
+              <div className="cat-card-count">6 Items Available</div>
+            </div>
+          </Link>
+
+          {/* Category 2: Chairs */}
+          <Link to="/products?category=Chairs" className="cat-card">
+            <img src="/images/chair.jpg" alt="Artisanal Chairs" />
+            <div className="cat-card-overlay">
+              <div className="cat-card-title">Chairs</div>
+              <div className="cat-card-count">12 Items Available</div>
+            </div>
+          </Link>
+
+          {/* Category 3: Tables */}
+          <Link to="/products?category=Tables" className="cat-card">
+            <img
+              src="https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=800&q=80"
+              alt="Sculptural Tables"
+            />
+            <div className="cat-card-overlay">
+              <div className="cat-card-title">Tables</div>
+              <div className="cat-card-count">14 Items Available</div>
+            </div>
+          </Link>
+
+          {/* Category 4: Decor & Living */}
+          <Link to="/products" className="cat-card">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
+              alt="Living and Accent Furniture"
+            />
+            <div className="cat-card-overlay">
+              <div className="cat-card-title">Living & Decor</div>
+              <div className="cat-card-count">8 Items Available</div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* ================= EDITORIAL SPLIT (MATCHING SCREENSHOT) ================= */}
+      <section className="editorial-split-section">
+        <div className="editorial-split-grid">
+          <div>
+            <span className="split-eyebrow">ENLIGHTEN YOUR HOME</span>
+            <h2 className="split-title">
+              Luminous Living: Architectural Furniture Designs
+            </h2>
+            <p className="split-description">
+              At <strong>GE Trading PLC</strong>, every bed, dining table, and ergonomic chair is sculpted from premium hardwood and stone, balancing European minimalism with warm, organic textures designed to enrich your sanctuary.
             </p>
+            <Link to="/products" className="btn-black-pill">
+              Shop Collection →
+            </Link>
           </div>
 
-          <div className="grid-4">
-            <div className="feature-card">
-              <div className="feature-icon-wrapper">🌱</div>
-              <h3>Agricultural Commodities</h3>
-              <p>
-                Direct-from-origin export of Ethiopian specialty coffee beans, high-purity sesame seeds, pulses, and whole spices tested to international lab standards.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon-wrapper">🏗️</div>
-              <h3>Construction Materials</h3>
-              <p>
-                Import and distribution of prime structural steel rebars, EN-compliant Portland cement, commercial tiles, and architectural supplies for large-scale projects.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon-wrapper">🚜</div>
-              <h3>Machinery & Equipment</h3>
-              <p>
-                Heavy earthmoving machinery, crawler excavators, diesel generators, and industrial manufacturing spare parts from world-renowned producers.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon-wrapper">📦</div>
-              <h3>Consumer Goods (FMCG)</h3>
-              <p>
-                Bulk supply of refined edible oils, packaged staples, and commercial food products supporting wholesale distribution networks and supermarkets.
-              </p>
-            </div>
+          <div className="split-image-frame">
+            <img
+              src="/images/hero.jpg"
+              alt="Living room with sculptural furniture"
+            />
           </div>
         </div>
       </section>
 
-      {/* ================= FEATURED PRODUCTS SPOTLIGHT ================= */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <span className="badge badge-dark">In-Demand Inventory</span>
-            <h2>Featured Trade Commodities</h2>
-            <p>
-              High-volume commodities currently available for immediate containerized shipment and contracted delivery schedules.
-            </p>
+      {/* ================= BESTSELLER SECTION (DARK THEME FROM SCREENSHOT) ================= */}
+      <section className="bestseller-dark-section">
+        <div className="bestseller-container">
+          <div className="bestseller-header">
+            <div>
+              <h2>Bestseller</h2>
+              <p>Experience the most coveted furniture creations at GE Trading PLC</p>
+            </div>
+            <Link to="/products" className="btn-outline-pill-white">
+              View All Collection
+            </Link>
           </div>
 
-          <div className="grid-3">
-            {featuredProducts.slice(0, 3).map((product) => (
-              <div key={product.id} className="product-card">
-                <div className="product-img-wrapper">
-                  <span className="product-category-tag badge badge-orange">
-                    {product.category}
-                  </span>
-                  <span className="product-origin-tag">
-                    📍 {product.origin}
-                  </span>
-                  <div className="product-img-symbol">{product.icon}</div>
+          <div className="bestseller-grid">
+            {bestsellers.map((product, idx) => (
+              <div key={product.id} className="bestseller-card">
+                {idx === 0 && (
+                  <span className="bestseller-tag sale">-15%</span>
+                )}
+                {idx === 2 && (
+                  <span className="bestseller-tag badge-custom">Signature</span>
+                )}
+
+                <div className="bestseller-img-box">
+                  <img src={product.image} alt={product.name} />
                 </div>
 
-                <div className="product-info">
-                  <h3 className="product-title">{product.name}</h3>
-                  <p className="product-desc">{product.description}</p>
-
-                  <div className="product-specs">
-                    <div className="product-spec-row">
-                      <span>Standard / Grade:</span>
-                      <strong>{product.grade}</strong>
-                    </div>
-                    <div className="product-spec-row">
-                      <span>Min Order Quantity:</span>
-                      <strong>{product.moq}</strong>
-                    </div>
-                    <div className="product-spec-row">
-                      <span>Estimated Lead Time:</span>
-                      <strong>{product.leadTime}</strong>
-                    </div>
-                  </div>
-
-                  <div className="product-card-footer">
+                <div className="bestseller-info">
+                  <span className="bestseller-category">{product.category}</span>
+                  <h3 className="bestseller-title">{product.name}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                    <span className="bestseller-price">{product.price}</span>
                     <button
-                      className="btn btn-primary btn-sm"
+                      className="btn-black-pill"
+                      style={{ padding: '6px 16px', fontSize: '0.8rem' }}
                       onClick={() => onOpenQuoteModal(product)}
-                      style={{ width: '100%' }}
                     >
-                      Inquire / Request Quote →
+                      Inquire
                     </button>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <Link to="/products" className="btn btn-secondary btn-lg">
-              View All Products & Full Specifications ({PRODUCTS_DATA.length} Items) →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= WHY CHOOSE GE TRADING PLC ================= */}
-      <section className="section section-dark">
-        <div className="container">
-          <div className="section-header">
-            <span className="badge badge-orange">Why Partner With Us</span>
-            <h2>Reliability Built on Integrity and Speed</h2>
-            <p style={{ color: '#94a3b8' }}>
-              International trade demands absolute precision in contract execution, banking security, and logistics reliability.
-            </p>
-          </div>
-
-          <div className="grid-3">
-            <div className="feature-card" style={{ background: '#131b2e', borderColor: '#1e293b' }}>
-              <div className="feature-icon-box" style={{ marginBottom: '16px' }}>✓</div>
-              <h3 style={{ color: '#ffffff' }}>Direct Origin Sourcing</h3>
-              <p style={{ color: '#94a3b8' }}>
-                We work directly with certified farm unions, extraction mills, and verified manufacturing factories, eliminating middlemen markups and safeguarding authenticity.
-              </p>
-            </div>
-
-            <div className="feature-card" style={{ background: '#131b2e', borderColor: '#1e293b' }}>
-              <div className="feature-icon-box" style={{ marginBottom: '16px' }}>🛡️</div>
-              <h3 style={{ color: '#ffffff' }}>Stringent Quality Controls</h3>
-              <p style={{ color: '#94a3b8' }}>
-                Every consignment undergoes independent pre-shipment inspections (SGS / Bureau Veritas standard) with comprehensive purity, moisture, and grade certifications.
-              </p>
-            </div>
-
-            <div className="feature-card" style={{ background: '#131b2e', borderColor: '#1e293b' }}>
-              <div className="feature-icon-box" style={{ marginBottom: '16px' }}>⚡</div>
-              <h3 style={{ color: '#ffffff' }}>Flexible Financing & Terms</h3>
-              <p style={{ color: '#94a3b8' }}>
-                Support for Letters of Credit (LC), Documentary Collections (CAD), and standard international banking arrangements compliant with ICC rules.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= CTA BANNER ================= */}
-      <section className="section" style={{ background: 'linear-gradient(135deg, #fff5eb 0%, #ffffff 100%)', borderTop: '1px solid #fee0c8' }}>
-        <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
-          <span className="badge badge-orange" style={{ marginBottom: '12px' }}>
-            Ready to Expand Your Supply Chain?
-          </span>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>
-            Get Competitive Quotations for Your Business Today
-          </h2>
-          <p style={{ fontSize: '1.1rem', marginBottom: '30px' }}>
-            Whether you require full container loads of export-grade commodities or bulk imports of structural supplies, GE Trading PLC guarantees unmatched pricing and seamless dispatch.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="btn btn-primary btn-lg" onClick={() => onOpenQuoteModal()}>
-              Submit Quotation Inquiry →
-            </button>
-            <Link to="/about#contact" className="btn btn-outline btn-lg">
-              Contact Our Trade Desk
-            </Link>
           </div>
         </div>
       </section>

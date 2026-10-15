@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { PRODUCTS_DATA, type Product } from '../data/products';
 
 interface ProductsPageProps {
@@ -6,10 +7,23 @@ interface ProductsPageProps {
 }
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const searchParam = searchParams.get('search');
 
-  const categories = ['All', 'Agricultural', 'Construction', 'Industrial & Machinery', 'Consumer Goods'];
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam || 'All');
+  const [searchQuery, setSearchQuery] = useState<string>(searchParam || '');
+
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [categoryParam, searchParam]);
+
+  const categories = ['All', 'Beds', 'Tables', 'Chairs'];
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS_DATA.filter((product) => {
@@ -18,184 +32,119 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.origin.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.grade.toLowerCase().includes(searchQuery.toLowerCase());
+        product.material.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
 
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    if (cat === 'All') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', cat);
+    }
+    setSearchParams(searchParams);
+  };
+
   return (
-    <div style={{ backgroundColor: 'var(--bg-secondary)', minHeight: '80vh', paddingBottom: '70px' }}>
-      {/* Header Banner */}
-      <section style={{ background: '#ffffff', borderBottom: '1px solid var(--border-light)', padding: '50px 0 40px 0' }}>
-        <div className="container">
-          <span className="badge badge-orange" style={{ marginBottom: '10px' }}>
-            International Trade Catalog
+    <div className="catalog-page-wrapper">
+      <div className="container">
+        {/* Editorial Catalog Header */}
+        <div className="catalog-header">
+          <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#78716c', fontWeight: 700 }}>
+            Curated Living Collection
           </span>
-          <h1 style={{ fontSize: '2.6rem', marginBottom: '12px' }}>
-            Commodities & Product Catalog
-          </h1>
-          <p style={{ maxWidth: '750px', fontSize: '1.1rem' }}>
-            Browse through our portfolio of certified export-grade agricultural goods, heavy industrial equipment, construction steel, and commercial products. All items are backed by strict quality inspection certificates.
+          <h1>Artisanal Beds, Tables & Chairs</h1>
+          <p style={{ color: '#78716c', fontSize: '1.05rem', marginTop: '10px' }}>
+            Discover minimalist wooden architecture, natural upholstery, and sculpted silhouettes designed for modern living by GE Trading PLC.
           </p>
         </div>
-      </section>
 
-      <div className="container" style={{ marginTop: '40px' }}>
-        {/* Filters and Search Bar */}
-        <div className="product-filters">
-          <div className="category-pills">
+        {/* Filter Pills and Search */}
+        <div className="catalog-filter-bar">
+          <div className="catalog-pills">
             {categories.map((cat) => (
               <button
                 key={cat}
-                className={`filter-pill ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat)}
+                className={`catalog-pill ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => handleCategoryChange(cat)}
               >
                 {cat}
               </button>
             ))}
           </div>
 
-          <div className="search-input-box">
+          <div className="search-input-box" style={{ minWidth: '280px' }}>
             <span className="search-icon">🔍</span>
             <input
               type="text"
-              placeholder="Search by product, grade, origin..."
+              placeholder="Search wood, dimensions, pieces..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
         </div>
 
-        {/* Results Counter */}
-        <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <p style={{ fontSize: '0.92rem', color: '#64748b' }}>
-            Showing <strong>{filteredProducts.length}</strong> {filteredProducts.length === 1 ? 'product' : 'products'}
-            {selectedCategory !== 'All' && <span> in <strong>{selectedCategory}</strong></span>}
-            {searchQuery && <span> matching "<strong>{searchQuery}</strong>"</span>}
-          </p>
+        {/* Product Cards Grid */}
+        <div className="grid-3">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="bestseller-card" style={{ border: '1px solid #e7e5e4' }}>
+              {product.tag && (
+                <span className="bestseller-tag badge-custom">{product.tag}</span>
+              )}
 
-          {(selectedCategory !== 'All' || searchQuery) && (
+              <div className="bestseller-img-box" style={{ height: '260px' }}>
+                <img src={product.image} alt={product.name} />
+              </div>
+
+              <div className="bestseller-info">
+                <span className="bestseller-category">{product.category}</span>
+                <h3 className="bestseller-title">{product.name}</h3>
+                <p style={{ fontSize: '0.88rem', color: '#78716c', lineHeight: '1.5', marginBottom: '12px' }}>
+                  {product.description}
+                </p>
+
+                <div style={{ background: '#f5f5f4', padding: '10px 14px', borderRadius: '10px', fontSize: '0.8rem', marginBottom: '16px' }}>
+                  <div><strong>Material:</strong> {product.material}</div>
+                  <div><strong>Dimensions:</strong> {product.dimensions}</div>
+                  <div><strong>Availability:</strong> {product.leadTime}</div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid #f5f5f4' }}>
+                  <span className="bestseller-price">{product.price}</span>
+                  <button
+                    className="btn-black-pill"
+                    style={{ padding: '8px 20px', fontSize: '0.85rem' }}
+                    onClick={() => onOpenQuoteModal(product)}
+                  >
+                    Custom Order / Inquire →
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div style={{ textAlign: 'center', padding: '80px 20px', background: '#ffffff', borderRadius: '20px' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '12px' }}>🪑</div>
+            <h3>No furniture pieces found</h3>
+            <p style={{ color: '#78716c', marginTop: '8px' }}>
+              We could not find anything matching "{searchQuery}". Try selecting "All" or submit a custom inquiry.
+            </p>
             <button
+              className="btn-black-pill"
+              style={{ marginTop: '20px' }}
               onClick={() => {
                 setSelectedCategory('All');
                 setSearchQuery('');
               }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#ff6b00',
-                cursor: 'pointer',
-                fontSize: '0.88rem',
-                fontWeight: '600',
-              }}
             >
-              Reset Filters ↺
-            </button>
-          )}
-        </div>
-
-        {/* Product Grid */}
-        {filteredProducts.length > 0 ? (
-          <div className="grid-3">
-            {filteredProducts.map((product) => (
-              <div key={product.id} className="product-card">
-                <div className="product-img-wrapper">
-                  <span className="product-category-tag badge badge-orange">
-                    {product.category}
-                  </span>
-                  <span className="product-origin-tag">
-                    📍 {product.origin}
-                  </span>
-                  <div className="product-img-symbol">{product.icon}</div>
-                </div>
-
-                <div className="product-info">
-                  <h3 className="product-title">{product.name}</h3>
-                  <p className="product-desc">{product.description}</p>
-
-                  <div className="product-specs">
-                    <div className="product-spec-row">
-                      <span>Specification / Grade:</span>
-                      <strong>{product.grade}</strong>
-                    </div>
-                    <div className="product-spec-row">
-                      <span>Minimum Order (MOQ):</span>
-                      <strong>{product.moq}</strong>
-                    </div>
-                    <div className="product-spec-row">
-                      <span>Standard Lead Time:</span>
-                      <strong>{product.leadTime}</strong>
-                    </div>
-                  </div>
-
-                  <div className="product-card-footer">
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={() => onOpenQuoteModal(product)}
-                      style={{ width: '100%' }}
-                    >
-                      Request Quotation (CIF / FOB) →
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div
-            style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '60px 20px',
-              textAlign: 'center',
-              border: '1px solid var(--border-light)',
-            }}
-          >
-            <div style={{ fontSize: '3rem', marginBottom: '14px' }}>🔍</div>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>No products found</h3>
-            <p style={{ color: '#64748b', maxWidth: '450px', margin: '0 auto 20px auto' }}>
-              We could not find any products matching your search criteria. You can request a custom sourcing inquiry directly with our trading team.
-            </p>
-            <button
-              className="btn btn-primary"
-              onClick={() => onOpenQuoteModal()}
-            >
-              Request Custom Sourcing / Commodity Inquiry
+              Reset Filters
             </button>
           </div>
         )}
-
-        {/* Custom Commodity Sourcing Banner */}
-        <div
-          style={{
-            marginTop: '60px',
-            background: '#ffffff',
-            borderRadius: '16px',
-            padding: '36px',
-            border: '1px solid var(--border-light)',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '20px',
-          }}
-        >
-          <div>
-            <span className="badge badge-dark" style={{ marginBottom: '8px' }}>
-              Bespoke Procurement
-            </span>
-            <h3 style={{ fontSize: '1.4rem', marginTop: '6px' }}>
-              Need a commodity or industrial specification not listed here?
-            </h3>
-            <p style={{ color: '#64748b', fontSize: '0.95rem' }}>
-              GE Trading PLC maintains an extensive partner network across Europe, Asia, and Africa for custom procurement.
-            </p>
-          </div>
-          <button className="btn btn-secondary" onClick={() => onOpenQuoteModal()}>
-            Submit Custom Sourcing Request →
-          </button>
-        </div>
       </div>
     </div>
   );
