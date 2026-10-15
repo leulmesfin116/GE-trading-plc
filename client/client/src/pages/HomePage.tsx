@@ -13,12 +13,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
     {
       title: 'The Art of Modern\nInterior Living',
       image: '/images/hero.jpg',
-      subtitle: 'Masterfully crafted beds, tables, and chairs engineered for timeless tranquility.',
+      subtitle: 'Bespoke woodworks, wardrobes, beds, kitchen cabinets, and luxury interior finishing.',
     },
     {
-      title: 'Pure Form &\nArtisanal Woodwork',
+      title: 'Artisanal Joinery &\nCustom Millwork',
       image: '/images/bed.jpg',
-      subtitle: 'Natural European oak and architectural joinery for contemporary sanctuaries.',
+      subtitle: 'Natural European hardwoods and contemporary architectural craftsmanship.',
     },
   ];
 
@@ -31,6 +31,58 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
   };
 
   const bestsellers = PRODUCTS_DATA.filter((p) => p.bestseller).slice(0, 4);
+
+  // The 8 specified categories with pictures
+  const categoriesList = [
+    {
+      name: 'Woodworks',
+      count: 'Custom Wall Panels & Credenzas',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      link: '/products?category=Woodworks',
+    },
+    {
+      name: 'Wardrobe',
+      count: 'Walk-In & Built-In Systems',
+      image: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=800&q=80',
+      link: '/products?category=Wardrobe',
+    },
+    {
+      name: 'Beds',
+      count: 'Platform & Upholstered Beds',
+      image: '/images/bed.jpg',
+      link: '/products?category=Beds',
+    },
+    {
+      name: 'Kitchen Cabinets',
+      count: 'Modular Island & Pantry Joinery',
+      image: '/images/kitchen.jpg',
+      link: '/products?category=Kitchen Cabinets',
+    },
+    {
+      name: 'Shoe Racks',
+      count: 'Slatted Entryway Consoles',
+      image: '/images/shoerack.jpg',
+      link: '/products?category=Shoe Racks',
+    },
+    {
+      name: 'Sofa / Coffee Tables',
+      count: 'Curved Sofas & Monolith Tables',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
+      link: '/products?category=Sofa / Coffee Tables',
+    },
+    {
+      name: 'Interior Design Finishing',
+      count: 'Turnkey Fit-Outs & Mouldings',
+      image: '/images/hero.jpg',
+      link: '/products?category=Interior Design Finishing',
+    },
+    {
+      name: 'Dining Tables',
+      count: 'Solid Slab & Pedestal Tables',
+      image: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=800&q=80',
+      link: '/products?category=Dining Tables',
+    },
+  ];
 
   return (
     <div>
@@ -100,50 +152,27 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* ================= CATEGORY CARDS (BEDS, TABLES, CHAIRS, LIVING) ================= */}
+      {/* ================= CATEGORY CARDS SECTION (ALL 8 CATEGORIES WITH PICTURES) ================= */}
       <section className="category-row-section">
-        <div className="category-cards-grid">
-          {/* Category 1: Beds */}
-          <Link to="/products?category=Beds" className="cat-card">
-            <img src="/images/bed.jpg" alt="Modern Minimalist Beds" />
-            <div className="cat-card-overlay">
-              <div className="cat-card-title">Beds</div>
-              <div className="cat-card-count">6 Items Available</div>
-            </div>
-          </Link>
+        <div className="container" style={{ marginBottom: '32px', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#78716c', fontWeight: 700 }}>
+            Craftsmanship Portfolio
+          </span>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 600, color: '#1c1917', marginTop: '6px' }}>
+            Our Signature Creations & Services
+          </h2>
+        </div>
 
-          {/* Category 2: Chairs */}
-          <Link to="/products?category=Chairs" className="cat-card">
-            <img src="/images/chair.jpg" alt="Artisanal Chairs" />
-            <div className="cat-card-overlay">
-              <div className="cat-card-title">Chairs</div>
-              <div className="cat-card-count">12 Items Available</div>
-            </div>
-          </Link>
-
-          {/* Category 3: Tables */}
-          <Link to="/products?category=Tables" className="cat-card">
-            <img
-              src="https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=800&q=80"
-              alt="Sculptural Tables"
-            />
-            <div className="cat-card-overlay">
-              <div className="cat-card-title">Tables</div>
-              <div className="cat-card-count">14 Items Available</div>
-            </div>
-          </Link>
-
-          {/* Category 4: Decor & Living */}
-          <Link to="/products" className="cat-card">
-            <img
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
-              alt="Living and Accent Furniture"
-            />
-            <div className="cat-card-overlay">
-              <div className="cat-card-title">Living & Decor</div>
-              <div className="cat-card-count">8 Items Available</div>
-            </div>
-          </Link>
+        <div className="category-cards-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', rowGap: '26px' }}>
+          {categoriesList.map((cat) => (
+            <Link key={cat.name} to={cat.link} className="cat-card">
+              <img src={cat.image} alt={cat.name} />
+              <div className="cat-card-overlay">
+                <div className="cat-card-title">{cat.name}</div>
+                <div className="cat-card-count">{cat.count}</div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -153,13 +182,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
           <div>
             <span className="split-eyebrow">ENLIGHTEN YOUR HOME</span>
             <h2 className="split-title">
-              Luminous Living: Architectural Furniture Designs
+              Luminous Living: Architectural Furniture & Millwork
             </h2>
             <p className="split-description">
-              At <strong>GE Trading PLC</strong>, every bed, dining table, and ergonomic chair is sculpted from premium hardwood and stone, balancing European minimalism with warm, organic textures designed to enrich your sanctuary.
+              At <strong>GE Trading PLC</strong>, our workshop specializes in custom woodworks, walk-in wardrobes, architectural beds, modular kitchen cabinets, entryway shoe racks, designer sofa & coffee tables, turnkey interior design finishings, and grand dining tables. Every creation is tailored to your space with unyielding structural integrity and natural elegance.
             </p>
             <Link to="/products" className="btn-black-pill">
-              Shop Collection →
+              Explore All Products →
             </Link>
           </div>
 
@@ -172,24 +201,25 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* ================= BESTSELLER SECTION (DARK THEME FROM SCREENSHOT) ================= */}
+      {/* ================= BESTSELLER SECTION (WITH PICTURES & WITHOUT PRICE) ================= */}
       <section className="bestseller-dark-section">
         <div className="bestseller-container">
           <div className="bestseller-header">
             <div>
-              <h2>Bestseller</h2>
-              <p>Experience the most coveted furniture creations at GE Trading PLC</p>
+              <h2>Featured Commissions</h2>
+              <p>Experience our master woodwork pieces — handcrafted to your exact architectural dimensions</p>
             </div>
             <Link to="/products" className="btn-outline-pill-white">
-              View All Collection
+              View All Products
             </Link>
           </div>
 
+          {/* Grid of Bestsellers - WITH PICTURES & WITHOUT PRICE */}
           <div className="bestseller-grid">
             {bestsellers.map((product, idx) => (
               <div key={product.id} className="bestseller-card">
                 {idx === 0 && (
-                  <span className="bestseller-tag sale">-15%</span>
+                  <span className="bestseller-tag sale">Popular</span>
                 )}
                 {idx === 2 && (
                   <span className="bestseller-tag badge-custom">Signature</span>
@@ -202,11 +232,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
                 <div className="bestseller-info">
                   <span className="bestseller-category">{product.category}</span>
                   <h3 className="bestseller-title">{product.name}</h3>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
-                    <span className="bestseller-price">{product.price}</span>
+
+                  {/* Without price: shows bespoke sizing & inquire button */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '10px' }}>
+                    <span style={{ fontSize: '0.78rem', color: '#ff6b00', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      Bespoke Order
+                    </span>
                     <button
                       className="btn-black-pill"
-                      style={{ padding: '6px 16px', fontSize: '0.8rem' }}
+                      style={{ padding: '6px 18px', fontSize: '0.8rem' }}
                       onClick={() => onOpenQuoteModal(product)}
                     >
                       Inquire

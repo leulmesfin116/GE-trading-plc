@@ -26,14 +26,17 @@ export const Footer: React.FC = () => {
           {/* Furniture Collections */}
           <div>
             <h4 style={{ color: '#ffffff', fontSize: '1.05rem', marginBottom: '18px', fontFamily: 'var(--font-heading)' }}>
-              Collections
+              Products & Services
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
-              <li><Link to="/products?category=Beds" style={{ color: '#a8a29e' }}>Platform & Canopy Beds</Link></li>
-              <li><Link to="/products?category=Tables" style={{ color: '#a8a29e' }}>Dining & Coffee Tables</Link></li>
-              <li><Link to="/products?category=Chairs" style={{ color: '#a8a29e' }}>Spindle & Lounge Chairs</Link></li>
-              <li><Link to="/products" style={{ color: '#a8a29e' }}>Pedestal Side Tables</Link></li>
-              <li><Link to="/products" style={{ color: '#a8a29e' }}>All Architectural Furniture</Link></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.88rem' }}>
+              <li><Link to="/products?category=Woodworks" style={{ color: '#a8a29e' }}>Woodworks</Link></li>
+              <li><Link to="/products?category=Wardrobe" style={{ color: '#a8a29e' }}>Wardrobe</Link></li>
+              <li><Link to="/products?category=Beds" style={{ color: '#a8a29e' }}>Beds</Link></li>
+              <li><Link to="/products?category=Kitchen Cabinets" style={{ color: '#a8a29e' }}>Kitchen Cabinets</Link></li>
+              <li><Link to="/products?category=Shoe Racks" style={{ color: '#a8a29e' }}>Shoe Racks</Link></li>
+              <li><Link to="/products?category=Sofa / Coffee Tables" style={{ color: '#a8a29e' }}>Sofa / Coffee Tables</Link></li>
+              <li><Link to="/products?category=Interior Design Finishing" style={{ color: '#a8a29e' }}>Interior Design Finishing</Link></li>
+              <li><Link to="/products?category=Dining Tables" style={{ color: '#a8a29e' }}>Dining Tables</Link></li>
             </ul>
           </div>
 
@@ -57,16 +60,16 @@ export const Footer: React.FC = () => {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.88rem' }}>
               <li style={{ color: '#d6d3d1' }}>
-                📍 Bole Sub-City, Commercial Design Hub, Addis Ababa, Ethiopia
+                📍 Dessie, Menafesha, Ethiopia
               </li>
               <li style={{ color: '#d6d3d1' }}>
-                📞 +251 11 654 3210 / +251 91 122 3344
+                📞 <a href="tel:+251901151559" style={{ color: '#ffffff', textDecoration: 'none' }}>+251 90 115 1559</a> / <a href="tel:+251943183568" style={{ color: '#ffffff', textDecoration: 'none' }}>+251 94 318 3568</a>
               </li>
               <li style={{ color: '#d6d3d1' }}>
-                ✉️ furniture@getradingplc.com / info@getradingplc.com
+                ✉️ info@getradingplc.com / furniture@getradingplc.com
               </li>
               <li style={{ color: '#a8a29e' }}>
-                🕒 Showroom Hours: Mon – Sat: 9:00 AM – 6:30 PM
+                🕒 Workshop Hours: Mon – Sat: 8:30 AM – 6:30 PM
               </li>
             </ul>
           </div>

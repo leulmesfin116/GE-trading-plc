@@ -99,7 +99,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </h3>
               <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
                 {product
-                  ? `Category: ${product.category} | Material: ${product.material} | Price: ${product.price}`
+                  ? `Category: ${product.category} | Material: ${product.material} | Dimensions: ${product.dimensions}`
                   : 'Specify your timber, dimensions, and custom furniture requirements.'}
               </p>
             </div>
@@ -147,7 +147,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     type="tel"
                     required
                     className="form-control"
-                    placeholder="+251 91 123 4567"
+                    placeholder="+251 90 115 1559"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
@@ -171,7 +171,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Addis Ababa / Dubai / London"
+                    placeholder="e.g. Dessie / Menafesha / Addis Ababa"
                     value={formData.destinationPort}
                     onChange={(e) => setFormData({ ...formData, destinationPort: e.target.value })}
                   />

@@ -61,80 +61,56 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Beds Category Dropdown */}
+          {/* Products Category Dropdown (Consolidating all 8 categories) */}
           <div
             className="nav-item-dropdown"
-            onMouseEnter={() => setActiveDropdown('beds')}
+            onMouseEnter={() => setActiveDropdown('products')}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <NavLink
-              to="/products?category=Beds"
+              to="/products"
               className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span>Beds</span>
+              <span>Products</span>
               <svg className="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </NavLink>
-            {activeDropdown === 'beds' && (
-              <div className="dropdown-menu">
-                <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>Platform Beds</Link>
-                <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>Solid Oak Bedframes</Link>
-                <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>Upholstered Headboards</Link>
-                <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>King & Queen Collections</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Tables Category Dropdown */}
-          <div
-            className="nav-item-dropdown"
-            onMouseEnter={() => setActiveDropdown('tables')}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink
-              to="/products?category=Tables"
-              className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span>Tables</span>
-              <svg className="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </NavLink>
-            {activeDropdown === 'tables' && (
-              <div className="dropdown-menu">
-                <Link to="/products?category=Tables" onClick={() => setMobileMenuOpen(false)}>Dining Tables</Link>
-                <Link to="/products?category=Tables" onClick={() => setMobileMenuOpen(false)}>Sculptural Coffee Tables</Link>
-                <Link to="/products?category=Tables" onClick={() => setMobileMenuOpen(false)}>Pedestal Side Tables</Link>
-                <Link to="/products?category=Tables" onClick={() => setMobileMenuOpen(false)}>Travertine & Wood Tables</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Chairs Category Dropdown */}
-          <div
-            className="nav-item-dropdown"
-            onMouseEnter={() => setActiveDropdown('chairs')}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink
-              to="/products?category=Chairs"
-              className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span>Chairs</span>
-              <svg className="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </NavLink>
-            {activeDropdown === 'chairs' && (
-              <div className="dropdown-menu">
-                <Link to="/products?category=Chairs" onClick={() => setMobileMenuOpen(false)}>Spindle Dining Chairs</Link>
-                <Link to="/products?category=Chairs" onClick={() => setMobileMenuOpen(false)}>Lounge & Armchairs</Link>
-                <Link to="/products?category=Chairs" onClick={() => setMobileMenuOpen(false)}>Minimalist Wooden Stools</Link>
-                <Link to="/products?category=Chairs" onClick={() => setMobileMenuOpen(false)}>Bouclé Accent Chairs</Link>
+            {activeDropdown === 'products' && (
+              <div className="dropdown-menu mega-products-menu">
+                <Link to="/products?category=Woodworks" onClick={() => setMobileMenuOpen(false)}>
+                  🪵 Woodworks
+                </Link>
+                <Link to="/products?category=Wardrobe" onClick={() => setMobileMenuOpen(false)}>
+                  🚪 Wardrobe
+                </Link>
+                <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>
+                  🛏️ Beds
+                </Link>
+                <Link to="/products?category=Kitchen Cabinets" onClick={() => setMobileMenuOpen(false)}>
+                  🍳 Kitchen Cabinets
+                </Link>
+                <Link to="/products?category=Shoe Racks" onClick={() => setMobileMenuOpen(false)}>
+                  👟 Shoe Racks
+                </Link>
+                <Link to="/products?category=Sofa / Coffee Tables" onClick={() => setMobileMenuOpen(false)}>
+                  🛋️ Sofa / Coffee Tables
+                </Link>
+                <Link to="/products?category=Interior Design Finishing" onClick={() => setMobileMenuOpen(false)}>
+                  🎨 Interior Design Finishing
+                </Link>
+                <Link to="/products?category=Dining Tables" onClick={() => setMobileMenuOpen(false)}>
+                  🍽️ Dining Tables
+                </Link>
+                <div style={{ height: '1px', background: '#f5f5f4', margin: '4px 0' }} />
+                <Link
+                  to="/products"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{ color: '#ff6b00', fontWeight: '700' }}
+                >
+                  View All Products →
+                </Link>
               </div>
             )}
           </div>

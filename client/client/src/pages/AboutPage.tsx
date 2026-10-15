@@ -98,14 +98,26 @@ export const AboutPage: React.FC = () => {
         <div style={{ background: '#ffffff', borderRadius: '24px', padding: '50px 40px', border: '1px solid #e7e5e4', maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#ff6b00', fontWeight: 700 }}>
-              Custom Woodwork Commissions
+              Workshop & Showroom
             </span>
             <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', marginTop: '6px' }}>
-              Request a Custom Piece or Visit Our Studio
+              Visit Our Studio or Inquire Online
             </h3>
-            <p style={{ color: '#78716c', fontSize: '0.95rem' }}>
-              We collaborate with homeowners, architects, and interior designers on bespoke sizing and custom wood finishes.
+            <p style={{ color: '#78716c', fontSize: '0.95rem', maxWidth: '540px', margin: '8px auto 20px auto' }}>
+              Our workshop and showroom is located in <strong>Dessie, Menafesha</strong>. Reach us directly via phone or WhatsApp for custom woodworks and interior finishing orders.
             </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '24px' }}>
+              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+                📍 <strong>Location:</strong> Dessie, Menafesha, Ethiopia
+              </div>
+              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+                📞 <strong>Direct Line:</strong> <a href="tel:+251901151559" style={{ color: '#ff6b00', fontWeight: '700' }}>+251 90 115 1559</a>
+              </div>
+              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+                📞 <strong>Secondary:</strong> <a href="tel:+251943183568" style={{ color: '#ff6b00', fontWeight: '700' }}>+251 94 318 3568</a>
+              </div>
+            </div>
           </div>
 
           {formSubmitted ? (
@@ -113,7 +125,7 @@ export const AboutPage: React.FC = () => {
               <div style={{ fontSize: '2.5rem', color: '#16a34a', marginBottom: '12px' }}>✓</div>
               <h4>Thank you for reaching out!</h4>
               <p style={{ color: '#78716c', marginTop: '6px' }}>
-                Our master design team at GE Trading PLC will review your commission inquiry and reply within 24 hours.
+                Our master design team at GE Trading PLC will review your commission inquiry and call you shortly.
               </p>
             </div>
           ) : (
@@ -149,7 +161,7 @@ export const AboutPage: React.FC = () => {
                   <input
                     type="tel"
                     className="form-control"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+251 90 115 1559"
                     value={contactData.phone}
                     onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
                   />
