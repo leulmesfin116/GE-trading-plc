@@ -70,7 +70,7 @@ export const AboutPage: React.FC = () => {
 
         <div className="grid-3" style={{ marginBottom: '80px' }}>
           <div style={{ background: '#ffffff', padding: '36px', borderRadius: '20px', border: '1px solid #e7e5e4' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '16px' }}>🛏️</div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: '#ff6b00', marginBottom: '14px', lineHeight: 1 }}>01</div>
             <h3 style={{ fontSize: '1.3rem', marginBottom: '10px' }}>Architectural Beds</h3>
             <p style={{ color: '#78716c', fontSize: '0.95rem', lineHeight: 1.6 }}>
               Low-profile platform frames, floating wood borders, and textured linen upholstered headboards engineered for deep rest.
@@ -78,7 +78,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div style={{ background: '#ffffff', padding: '36px', borderRadius: '20px', border: '1px solid #e7e5e4' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '16px' }}>🪵</div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: '#ff6b00', marginBottom: '14px', lineHeight: 1 }}>02</div>
             <h3 style={{ fontSize: '1.3rem', marginBottom: '10px' }}>Sculptural Tables</h3>
             <p style={{ color: '#78716c', fontSize: '0.95rem', lineHeight: 1.6 }}>
               Solid oak dining tables with ribbed pedestal bases, monolithic Roman travertine coffee tables, and bedside companion plinths.
@@ -86,7 +86,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div style={{ background: '#ffffff', padding: '36px', borderRadius: '20px', border: '1px solid #e7e5e4' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '16px' }}>🪑</div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: '#ff6b00', marginBottom: '14px', lineHeight: 1 }}>03</div>
             <h3 style={{ fontSize: '1.3rem', marginBottom: '10px' }}>Artisanal Chairs</h3>
             <p style={{ color: '#78716c', fontSize: '0.95rem', lineHeight: 1.6 }}>
               Turned spindle dining chairs, plush bouclé lounge chairs, and woven cane armchairs designed with ergonomic precision.

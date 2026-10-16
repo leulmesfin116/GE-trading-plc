@@ -153,7 +153,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
 
         {filteredProducts.length === 0 && (
           <div style={{ textAlign: 'center', padding: '80px 20px', background: '#ffffff', borderRadius: '20px' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '12px' }}>🪵</div>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#78716c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ margin: '0 auto 16px auto', display: 'block' }}>
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
             <h3>No items found in this collection</h3>
             <p style={{ color: '#78716c', marginTop: '8px' }}>
               We could not find any pieces matching "{searchQuery}". You can request a custom wood design directly from our studio.

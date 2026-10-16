@@ -80,28 +80,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeDropdown === 'products' && (
               <div className="dropdown-menu mega-products-menu">
                 <Link to="/products?category=Woodworks" onClick={() => setMobileMenuOpen(false)}>
-                  🪵 Woodworks
+                  Woodworks
                 </Link>
                 <Link to="/products?category=Wardrobe" onClick={() => setMobileMenuOpen(false)}>
-                  🚪 Wardrobe
+                  Wardrobe
                 </Link>
                 <Link to="/products?category=Beds" onClick={() => setMobileMenuOpen(false)}>
-                  🛏️ Beds
+                  Beds
                 </Link>
                 <Link to="/products?category=Kitchen Cabinets" onClick={() => setMobileMenuOpen(false)}>
-                  🍳 Kitchen Cabinets
+                  Kitchen Cabinets
                 </Link>
                 <Link to="/products?category=Shoe Racks" onClick={() => setMobileMenuOpen(false)}>
-                  👟 Shoe Racks
+                  Shoe Racks
                 </Link>
                 <Link to="/products?category=Sofa / Coffee Tables" onClick={() => setMobileMenuOpen(false)}>
-                  🛋️ Sofa / Coffee Tables
+                  Sofa / Coffee Tables
                 </Link>
                 <Link to="/products?category=Interior Design Finishing" onClick={() => setMobileMenuOpen(false)}>
-                  🎨 Interior Design Finishing
+                  Interior Design Finishing
                 </Link>
                 <Link to="/products?category=Dining Tables" onClick={() => setMobileMenuOpen(false)}>
-                  🍽️ Dining Tables
+                  Dining Tables
                 </Link>
                 <div style={{ height: '1px', background: '#f5f5f4', margin: '4px 0' }} />
                 <Link
