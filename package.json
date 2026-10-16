@@ -1,0 +1,11 @@
+{
+  "name": "ge-trading-plc-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix client/client install && npm --prefix client/client run build",
+    "dev": "npm --prefix client/client run dev",
+    "start": "npm --prefix client/client run preview",
+    "install:all": "npm --prefix client/client install && npm --prefix server install"
+  }
+}
