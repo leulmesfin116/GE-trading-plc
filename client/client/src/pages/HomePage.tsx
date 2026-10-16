@@ -158,12 +158,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenQuoteModal }) => {
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#78716c', fontWeight: 700 }}>
             Craftsmanship Portfolio
           </span>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 600, color: '#1c1917', marginTop: '6px' }}>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.7rem, 4vw, 2.4rem)', fontWeight: 600, color: '#1c1917', marginTop: '6px' }}>
             Our Signature Creations & Services
           </h2>
         </div>
 
-        <div className="category-cards-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', rowGap: '26px' }}>
+        <div className="category-cards-grid">
           {categoriesList.map((cat) => (
             <Link key={cat.name} to={cat.link} className="cat-card">
               <img src={cat.image} alt={cat.name} />

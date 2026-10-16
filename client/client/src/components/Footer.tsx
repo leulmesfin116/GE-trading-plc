@@ -4,9 +4,9 @@ import Logo from './Logo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer style={{ background: '#0a0d14', color: '#a8a29e', padding: '70px 0 30px 0', borderTop: '1px solid #1c1917' }}>
+    <footer style={{ background: '#0a0d14', color: '#a8a29e', padding: 'clamp(40px, 8vw, 70px) 0 30px 0', borderTop: '1px solid #1c1917' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1.2fr', gap: '40px', marginBottom: '50px' }}>
+        <div className="footer-columns-grid">
           {/* Brand Info */}
           <div>
             <Logo size="md" darkMode={true} />

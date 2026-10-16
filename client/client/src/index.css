@@ -52,12 +52,52 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  width: 100%;
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   CORE RESPONSIVE CONTAINER & GRID UTILITIES
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 }
 
 /* ==========================================================================
@@ -825,18 +865,28 @@ body {
 .catalog-pills {
   display: flex;
   gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.catalog-pills::-webkit-scrollbar {
+  display: none;
 }
 
 .catalog-pill {
-  padding: 8px 22px;
+  padding: 8px 20px;
   border-radius: var(--radius-pill);
   border: 1px solid #e7e5e4;
   background: transparent;
   color: #44403c;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  flex-shrink: 0;
 }
 
 .catalog-pill:hover {
@@ -850,32 +900,237 @@ body {
   border-color: #1c1917;
 }
 
-/* Responsive Breakpoints */
+.search-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 340px;
+}
+
+.search-input-box .search-icon {
+  position: absolute;
+  left: 14px;
+  pointer-events: none;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.search-input-box input {
+  width: 100%;
+  padding: 10px 16px 10px 38px;
+  border: 1px solid #e7e5e4;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.15s ease;
+  background: #f5f5f4;
+  font-family: var(--font-body);
+}
+
+.search-input-box input:focus {
+  background: #ffffff;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+}
+
+/* ==========================================================================
+   MODAL OVERLAY & FORM CONTROLS
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 13, 20, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  animation: modalScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e7e5e4;
+  background: #f5f5f4;
+  color: #44403c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #1c1917;
+  color: #ffffff;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #1c1917;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid #d6d3d1;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  color: #1c1917;
+  background-color: #fafaf9;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: var(--brand-orange);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.14);
+}
+
+.responsive-form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* Badges & Buttons */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-orange {
+  background: #fff5ed;
+  color: var(--brand-orange);
+  border: 1px solid rgba(255, 107, 0, 0.2);
+}
+
+.btn-primary {
+  background: var(--brand-orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--brand-orange-hover);
+  box-shadow: 0 6px 18px rgba(255, 107, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   FOOTER RESPONSIVE GRID
+   ========================================================================== */
+
+.footer-columns-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (TABLETS, MOBILES, SMALL SCREENS)
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-title-editorial {
-    font-size: 3.6rem;
+    font-size: 3.4rem;
   }
-  .category-cards-grid,
+  .category-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .cat-card {
+    height: 320px;
+  }
   .bestseller-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 24px;
+    row-gap: 20px;
   }
   .editorial-split-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
+  }
+  .footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
   }
 }
 
+/* Standard Tablets & Mobile Phones (<= 768px) */
 @media (max-width: 768px) {
   .floating-header-container {
     padding: 0 12px;
-    top: 14px;
+    top: 12px;
   }
   .pill-navbar {
-    padding: 8px 16px;
+    padding: 8px 14px;
+    border-radius: 20px;
   }
   .navbar-center {
     display: none;
@@ -886,29 +1141,150 @@ body {
     top: 100%;
     left: 0;
     right: 0;
-    margin-top: 12px;
+    margin-top: 10px;
     background: #ffffff;
     border-radius: 20px;
-    padding: 20px;
+    padding: 20px 16px;
     flex-direction: column;
-    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
-    gap: 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+    gap: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .navbar-center.mobile-visible .dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: 1px solid #f0eee9;
+    background: #faf8f5;
+    border-radius: 14px;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .navbar-right {
+    gap: 10px;
   }
   .mobile-hamburger-btn {
-    display: block;
-  }
-  .hero-title-editorial {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f5f5f4;
   }
   .hero-editorial {
-    padding-top: 120px;
-    min-height: 75vh;
+    padding: 110px 16px 60px 16px;
+    min-height: 72vh;
   }
-  .category-cards-grid,
+  .hero-title-editorial {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+  .hero-carousel-nav {
+    padding: 0 12px;
+  }
+  .hero-nav-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  .benefits-strip {
+    padding: 20px 0;
+  }
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 16px;
+  }
+  .benefit-item {
+    gap: 10px;
+  }
+  .benefit-text {
+    font-size: 0.82rem;
+  }
+  .category-row-section {
+    padding: 48px 0;
+  }
+  .editorial-split-section {
+    padding: 50px 0;
+  }
+  .split-title {
+    font-size: clamp(1.8rem, 5vw, 2.3rem);
+  }
+  .split-image-frame {
+    height: 280px;
+  }
+  .bestseller-dark-section {
+    padding: 50px 0 70px 0;
+  }
+  .bestseller-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .bestseller-header h2 {
+    font-size: 1.8rem;
+  }
+  .catalog-page-wrapper {
+    padding-top: 90px;
+    padding-bottom: 50px;
+  }
+  .catalog-header h1 {
+    font-size: clamp(2rem, 6vw, 2.7rem);
+  }
+  .catalog-filter-bar {
+    padding: 12px 14px;
+    border-radius: 20px;
+  }
+  .search-input-box {
+    max-width: 100%;
+    width: 100%;
+  }
+  .modal-content {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  .responsive-form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* Small Smart Phones (<= 520px) */
+@media (max-width: 520px) {
+  .category-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+  .cat-card {
+    height: 260px;
+  }
   .bestseller-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .benefits-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .icon-action-btn:nth-child(2),
+  .icon-action-btn:nth-child(3) {
+    display: none; /* Hide User Account & Wishlist on small mobile bar to prevent cramping; still in menu */
+  }
+  .logo-company-name {
+    font-size: 0.95rem;
+  }
+  .logo-badge.size-sm {
+    font-size: 1rem;
+    padding: 2px 6px;
   }
 }
+

@@ -63,7 +63,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
 
         {/* Filter Pills and Search */}
         <div className="catalog-filter-bar">
-          <div className="catalog-pills" style={{ flexWrap: 'wrap', gap: '8px' }}>
+          <div className="catalog-pills">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -75,7 +75,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
             ))}
           </div>
 
-          <div className="search-input-box" style={{ minWidth: '280px' }}>
+          <div className="search-input-box">
             <span className="search-icon">🔍</span>
             <input
               type="text"

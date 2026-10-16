@@ -17,34 +17,34 @@ export const AboutPage: React.FC = () => {
   };
 
   return (
-    <div style={{ paddingTop: '120px', paddingBottom: '80px', backgroundColor: '#fafaf9' }}>
+    <div style={{ paddingTop: 'clamp(90px, 12vw, 120px)', paddingBottom: 'clamp(40px, 8vw, 80px)', backgroundColor: '#fafaf9' }}>
       <div className="container">
         {/* About Editorial Hero */}
         <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 60px auto' }}>
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#78716c', fontWeight: 700 }}>
             Artisanal Woodworking & Modern Living
           </span>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '3.6rem', fontWeight: 400, marginTop: '10px', color: '#1c1917', lineHeight: 1.15 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.1rem, 6vw, 3.6rem)', fontWeight: 400, marginTop: '10px', color: '#1c1917', lineHeight: 1.15 }}>
             Crafting Timeless Beds, Tables & Chairs
           </h1>
-          <p style={{ color: '#78716c', fontSize: '1.15rem', marginTop: '18px', lineHeight: 1.7 }}>
+          <p style={{ color: '#78716c', fontSize: 'clamp(0.95rem, 2vw, 1.15rem)', marginTop: '18px', lineHeight: 1.7 }}>
             <strong>GE Trading PLC</strong> is a design studio and master furniture manufacturer specializing in architectural wooden platform beds, sculptural dining & coffee tables, and ergonomic accent chairs. We marry traditional joinery with clean, contemporary Scandinavian aesthetics.
           </p>
         </div>
 
         {/* Brand Card & Craftsmanship Grid */}
         <div className="editorial-split-grid" style={{ marginBottom: '80px' }}>
-          <div style={{ background: '#ffffff', borderRadius: '24px', padding: '40px', border: '1px solid #e7e5e4' }}>
+          <div style={{ background: '#ffffff', borderRadius: '24px', padding: 'clamp(20px, 4vw, 40px)', border: '1px solid #e7e5e4' }}>
             <div style={{ marginBottom: '24px' }}>
               <Logo size="lg" showSubtitle={false} />
             </div>
-            <h3 style={{ fontSize: '1.6rem', marginBottom: '14px', fontFamily: 'var(--font-heading)' }}>
+            <h3 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.6rem)', marginBottom: '14px', fontFamily: 'var(--font-heading)' }}>
               The GE Design Philosophy
             </h3>
             <p style={{ color: '#78716c', lineHeight: 1.7, marginBottom: '20px' }}>
               Our logo features an authoritative black <strong>G</strong> representing architectural stability and durable engineering, and a vibrant orange <strong>E</strong> symbolizing energetic creativity and warm organic living.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div className="responsive-form-grid-2">
               <div style={{ background: '#f5f5f4', padding: '16px', borderRadius: '14px' }}>
                 <strong style={{ display: 'block', fontSize: '1.2rem', color: '#1c1917' }}>100%</strong>
                 <span style={{ fontSize: '0.85rem', color: '#78716c' }}>Solid Sustainably Harvested Hardwood</span>
@@ -95,26 +95,26 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* Contact & Custom Commission Form */}
-        <div style={{ background: '#ffffff', borderRadius: '24px', padding: '50px 40px', border: '1px solid #e7e5e4', maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ background: '#ffffff', borderRadius: '24px', padding: 'clamp(24px, 5vw, 50px) clamp(16px, 4vw, 40px)', border: '1px solid #e7e5e4', maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#ff6b00', fontWeight: 700 }}>
               Workshop & Showroom
             </span>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', marginTop: '6px' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginTop: '6px' }}>
               Visit Our Studio or Inquire Online
             </h3>
             <p style={{ color: '#78716c', fontSize: '0.95rem', maxWidth: '540px', margin: '8px auto 20px auto' }}>
               Our workshop and showroom is located in <strong>Dessie, Menafesha</strong>. Reach us directly via phone or WhatsApp for custom woodworks and interior finishing orders.
             </p>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '24px' }}>
-              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '24px' }}>
+              <div style={{ background: '#f5f5f4', padding: '10px 16px', borderRadius: '12px', fontSize: '0.88rem' }}>
                 📍 <strong>Location:</strong> Dessie, Menafesha, Ethiopia
               </div>
-              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+              <div style={{ background: '#f5f5f4', padding: '10px 16px', borderRadius: '12px', fontSize: '0.88rem' }}>
                 📞 <strong>Direct Line:</strong> <a href="tel:+251901151559" style={{ color: '#ff6b00', fontWeight: '700' }}>+251 90 115 1559</a>
               </div>
-              <div style={{ background: '#f5f5f4', padding: '10px 18px', borderRadius: '12px', fontSize: '0.9rem' }}>
+              <div style={{ background: '#f5f5f4', padding: '10px 16px', borderRadius: '12px', fontSize: '0.88rem' }}>
                 📞 <strong>Secondary:</strong> <a href="tel:+251943183568" style={{ color: '#ff6b00', fontWeight: '700' }}>+251 94 318 3568</a>
               </div>
             </div>
@@ -130,7 +130,7 @@ export const AboutPage: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleContactSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+              <div className="responsive-form-grid-2" style={{ marginBottom: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 600, marginBottom: '6px' }}>Your Name *</label>
                   <input
@@ -155,7 +155,7 @@ export const AboutPage: React.FC = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+              <div className="responsive-form-grid-2" style={{ marginBottom: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 600, marginBottom: '6px' }}>Phone / WhatsApp</label>
                   <input

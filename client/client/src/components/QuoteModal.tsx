@@ -105,7 +105,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div className="responsive-form-grid-2">
                 <div className="form-group">
                   <label>Your Name *</label>
                   <input
@@ -129,7 +129,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div className="responsive-form-grid-2">
                 <div className="form-group">
                   <label>Email Address *</label>
                   <input
@@ -154,7 +154,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div className="responsive-form-grid-2">
                 <div className="form-group">
                   <label>Desired Quantity *</label>
                   <input

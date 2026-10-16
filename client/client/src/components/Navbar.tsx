@@ -9,6 +9,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
+  onOpenQuoteModal,
   cartCount = 0,
   wishlistCount = 0,
 }) => {
@@ -35,23 +36,43 @@ export const Navbar: React.FC<NavbarProps> = ({
           <Logo size="sm" showSubtitle={false} />
         </div>
 
-        {/* Center: Menu Items with Dropdowns (Same as screenshot) */}
+        {/* Center: Menu Items with Dropdowns (Responsive for both desktop hover & mobile tap) */}
         <nav className={`navbar-center ${mobileMenuOpen ? 'mobile-visible' : ''}`}>
           <div
             className="nav-item-dropdown"
             onMouseEnter={() => setActiveDropdown('home')}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <NavLink
-              to="/"
-              className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span>Home</span>
-              <svg className="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </NavLink>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <NavLink
+                to="/"
+                className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Home</span>
+              </NavLink>
+              <button
+                type="button"
+                className="mobile-dropdown-toggle"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveDropdown(activeDropdown === 'home' ? null : 'home');
+                }}
+                aria-label="Toggle home submenu"
+                style={{ background: 'none', border: 'none', padding: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              >
+                <svg
+                  className="dropdown-arrow"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  fill="none"
+                  style={{ transform: activeDropdown === 'home' ? 'rotate(180deg)' : 'none' }}
+                >
+                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
             {activeDropdown === 'home' && (
               <div className="dropdown-menu">
                 <Link to="/" onClick={() => setMobileMenuOpen(false)}>Modern Living</Link>
@@ -67,16 +88,36 @@ export const Navbar: React.FC<NavbarProps> = ({
             onMouseEnter={() => setActiveDropdown('products')}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <NavLink
-              to="/products"
-              className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span>Products</span>
-              <svg className="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </NavLink>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <NavLink
+                to="/products"
+                className={({ isActive }) => `nav-link-pill ${isActive ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Products</span>
+              </NavLink>
+              <button
+                type="button"
+                className="mobile-dropdown-toggle"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveDropdown(activeDropdown === 'products' ? null : 'products');
+                }}
+                aria-label="Toggle products submenu"
+                style={{ background: 'none', border: 'none', padding: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              >
+                <svg
+                  className="dropdown-arrow"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  fill="none"
+                  style={{ transform: activeDropdown === 'products' ? 'rotate(180deg)' : 'none' }}
+                >
+                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
             {activeDropdown === 'products' && (
               <div className="dropdown-menu mega-products-menu">
                 <Link to="/products?category=Woodworks" onClick={() => setMobileMenuOpen(false)}>
@@ -124,6 +165,38 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <span>About</span>
             </NavLink>
+          </div>
+
+          {/* Mobile Direct Action & Call Button */}
+          <div style={{ borderTop: '1px solid #f0eee9', paddingTop: '12px', marginTop: '6px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <button
+              className="btn btn-primary"
+              style={{ width: '100%', padding: '10px 18px', fontSize: '0.9rem', justifyContent: 'center' }}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenQuoteModal) onOpenQuoteModal();
+              }}
+            >
+              Request Custom Quote ✉️
+            </button>
+            <a
+              href="tel:+251901151559"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                color: '#1c1917',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                padding: '8px',
+                background: '#f5f5f4',
+                borderRadius: '9999px',
+              }}
+            >
+              📞 Call: +251 90 115 1559
+            </a>
           </div>
         </nav>
 
