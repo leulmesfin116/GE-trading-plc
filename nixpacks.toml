@@ -1,0 +1,12 @@
+# Nixpacks configuration for universal Linux deployment (EthioDeploy, Railway, Coolify)
+[phases.setup]
+nixPkgs = ["nodejs_22"]
+
+[phases.install]
+cmds = ["npm --prefix client/client install --include=optional"]
+
+[phases.build]
+cmds = ["npm --prefix client/client run build"]
+
+[start]
+cmd = "npm --prefix client/client run preview"
